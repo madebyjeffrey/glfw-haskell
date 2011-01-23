@@ -21,7 +21,7 @@ extra-source-files:
   glfw/lib/internal.h
   glfw/lib/x11/platform.h
   glfw/lib/win32/platform.h
-  glfw/lib/macosx/platform.h
+  glfw/lib/cocoa/platform.h
 
 flag dynamic
   description: Dynamically link with GLFW C libray if your system provides it.
@@ -61,18 +61,19 @@ library
       glfw/lib/window.c
 
     if os(darwin)
-      include-dirs: glfw/lib/macosx
-      frameworks:   AGL Carbon OpenGL
-      cc-options:   -msse2
+      include-dirs: glfw/lib/cocoa
+      frameworks:   AGL Cocoa OpenGL
+      cc-options:   -msse2 
+      ghc-options:  -x c
       c-sources:
-        glfw/lib/macosx/macosx_enable.c
-        glfw/lib/macosx/macosx_fullscreen.c
-        glfw/lib/macosx/macosx_glext.c
-        glfw/lib/macosx/macosx_init.c
-        glfw/lib/macosx/macosx_joystick.c
-        glfw/lib/macosx/macosx_thread.c
-        glfw/lib/macosx/macosx_time.c
-        glfw/lib/macosx/macosx_window.c
+        glfw/lib/cocoa/cocoa_enable.m
+        glfw/lib/cocoa/cocoa_fullscreen.m
+        glfw/lib/cocoa/cocoa_glext.m
+        glfw/lib/cocoa/cocoa_init.m
+        glfw/lib/cocoa/cocoa_joystick.m
+        glfw/lib/cocoa/cocoa_thread.m
+        glfw/lib/cocoa/cocoa_time.m
+        glfw/lib/cocoa/cocoa_window.m
     else
       if os(mingw32)
         include-dirs:    glfw/lib/win32
